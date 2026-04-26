@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Walkthrough: Perpustakaan UKK</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --bg: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --card-bg: #f8fafc;
+            --code-bg: #f1f5f9;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
+        }
+
+        h1 .emoji { font-size: 32px; }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 18px 0;
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:nth-child(even) {
+            background: var(--card-bg);
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #e11d48;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 12px 0 18px 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 14px 0;
+        }
+
+        .card-blue {
+            border-left: 4px solid var(--primary);
+            background: #eff6ff;
+        }
+
+        .card-green {
+            border-left: 4px solid var(--accent-green);
+            background: #ecfdf5;
+        }
+
+        .card-orange {
+            border-left: 4px solid var(--accent-orange);
+            background: #fffbeb;
+        }
+
+        .card-red {
+            border-left: 4px solid var(--accent-red);
+            background: #fef2f2;
+        }
+
+        .card-purple {
+            border-left: 4px solid var(--accent-purple);
+            background: #f5f3ff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-admin { background: #dbeafe; color: #1d4ed8; }
+        .badge-anggota { background: #d1fae5; color: #065f46; }
+        .badge-get { background: #e0e7ff; color: #3730a3; }
+        .badge-post { background: #dcfce7; color: #166534; }
+        .badge-put { background: #fef3c7; color: #92400e; }
+        .badge-delete { background: #fee2e2; color: #991b1b; }
+
+        ul, ol {
+            margin: 8px 0 12px 24px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .flow-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 10px 0 14px 0;
+        }
+
+        .flow-step {
+            background: var(--primary);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .flow-arrow {
+            color: var(--text-secondary);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .file-tree {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 18px 22px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            margin: 12px 0 18px 0;
+        }
+
+        .file-tree .folder { color: #60a5fa; font-weight: 600; }
+        .file-tree .file { color: #a5b4fc; }
+        .file-tree .comment { color: #64748b; font-style: italic; }
+
+        hr {
+            border: none;
+            border-top: 2px solid var(--border);
+            margin: 30px 0;
+        }
+
+        .section-icon {
+            font-size: 20px;
+            margin-right: 6px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 12px 0;
+        }
+
+        @media print {
+            body { font-size: 12px; }
+            .container { padding: 20px; }
+            h1 { font-size: 24px; }
+            h2 { font-size: 17px; page-break-after: avoid; }
+            h3 { font-size: 14px; page-break-after: avoid; }
+            table { font-size: 11px; }
+            .card { break-inside: avoid; }
+            .no-break { break-inside: avoid; }
+            @page { margin: 1.5cm; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <h1><span class="emoji">📚</span> Walkthrough: Perpustakaan UKK</h1>
+        <p class="subtitle">Penjelasan Lengkap Source Code — Sistem Manajemen Perpustakaan Sekolah</p>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">🏗️</span> 1. Arsitektur & Teknologi</h2>
+        <table>
+            <tr><th>Komponen</th><th>Teknologi</th></tr>
+            <tr><td>Framework</td><td>Laravel (PHP)</td></tr>
+            <tr><td>Database</td><td>MySQL</td></tr>
+            <tr><td>Frontend</td><td>Blade Templates + Tailwind CSS</td></tr>
+            <tr><td>Auth</td><td>Laravel Built-in + Custom Guard</td></tr>
+            <tr><td>Theming</td><td>Dark / Light Mode (CSS Variables)</td></tr>
+        </table>
+
+        <hr>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">🗄️</span> 2. Struktur Database (4 Tabel Utama)</h2>
+
+        <div class="two-col">
+            <div class="card no-break">
+                <h4>Tabel <code>users</code></h4>
+                <p>Menyimpan data <strong>admin</strong> (login via <code>/login</code>)</p>
+                <p><small>Kolom: id, name, email, password, role</small></p>
+            </div>
+            <div class="card no-break">
+                <h4>Tabel <code>anggotas</code></h4>
+                <p>Menyimpan data <strong>anggota/siswa</strong> (login via <code>/anggota/login</code>)</p>
+                <p><small>Kolom: id, nis, nama, kelas, email, password</small></p>
+            </div>
+            <div class="card no-break">
+                <h4>Tabel <code>bukus</code></h4>
+                <p>Menyimpan data <strong>buku</strong> perpustakaan</p>
+                <p><small>Kolom: id, judul, penulis, penerbit, tahun, stok, deskripsi, cover_image</small></p>
+            </div>
+            <div class="card no-break">
+                <h4>Tabel <code>transaksis</code></h4>
+                <p>Menyimpan data <strong>peminjaman buku</strong></p>
+                <p><small>Kolom: id, anggota_id (FK), buku_id (FK), tanggal_pinjam, tanggal_kembali, status, denda</small></p>
+            </div>
+        </div>
+
+        <div class="card card-blue no-break">
+            <strong>Relasi Antar Tabel:</strong>
+            <ul>
+                <li><code>anggotas</code> → <strong>hasMany</strong> → <code>transaksis</code> (1 anggota bisa punya banyak transaksi)</li>
+                <li><code>bukus</code> → <strong>hasMany</strong> → <code>transaksis</code> (1 buku bisa ada di banyak transaksi)</li>
+                <li><code>transaksis</code> → <strong>belongsTo</strong> → <code>anggotas</code> &amp; <code>bukus</code></li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">🔐</span> 3. Sistem Autentikasi (2 Guard Terpisah)</h2>
+
+        <p>Aplikasi ini menggunakan <strong>2 authentication guard</strong> yang didefinisikan di <code>config/auth.php</code>:</p>
+
+        <div class="two-col">
+            <div class="card card-blue no-break">
+                <h4><span class="badge badge-admin">Admin</span> Guard: <code>web</code></h4>
+                <p><strong>Tabel:</strong> <code>users</code></p>
+                <p><strong>Model:</strong> <code>User.php</code></p>
+                <p><strong>URL Login:</strong> <code>/login</code></p>
+                <p><strong>Setelah Login:</strong> <code>/dashboard</code></p>
+            </div>
+            <div class="card card-green no-break">
+                <h4><span class="badge badge-anggota">Anggota</span> Guard: <code>anggota</code></h4>
+                <p><strong>Tabel:</strong> <code>anggotas</code></p>
+                <p><strong>Model:</strong> <code>Anggota.php</code></p>
+                <p><strong>URL Login:</strong> <code>/anggota/login</code></p>
+                <p><strong>Setelah Login:</strong> <code>/anggota/dashboard</code></p>
+            </div>
+        </div>
+
+        <div class="card card-orange no-break">
+            <strong>⚠️ Penting:</strong> Admin dan Anggota punya <strong>session terpisah</strong>. Login admin tidak mengganggu login anggota, dan sebaliknya.
+        </div>
+
+        <h3>Alur Login Admin</h3>
+        <div class="flow-box">
+            <span class="flow-step">User buka /login</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Isi email & password</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Dicek ke tabel users (guard web)</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Redirect /dashboard</span>
+        </div>
+
+        <h3>Alur Login Anggota</h3>
+        <div class="flow-box">
+            <span class="flow-step">User buka /anggota/login</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Isi email & password</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Dicek ke tabel anggotas (guard anggota)</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Redirect /anggota/dashboard</span>
+        </div>
+
+        <h3>Alur Registrasi Anggota</h3>
+        <div class="flow-box">
+            <span class="flow-step">User buka /anggota/register</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Isi NIS, nama, kelas, email, password</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Validasi (NIS & email unik)</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Simpan ke DB → Redirect ke login</span>
+        </div>
+
+        <hr>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">🗺️</span> 4. Routing — Peta Semua URL</h2>
+        <p>File: <code>routes/web.php</code></p>
+
+        <h3>Rute Root</h3>
+        <table>
+            <tr><th>URL</th><th>Aksi</th></tr>
+            <tr><td><code>/</code></td><td>Jika sudah login admin → redirect <code>/dashboard</code>, jika belum → redirect <code>/login</code></td></tr>
+        </table>
+
+        <h3>Rute Admin <span class="badge badge-admin">ADMIN</span></h3>
+        <table>
+            <tr><th>URL</th><th>Method</th><th>Fungsi</th></tr>
+            <tr><td><code>/dashboard</code></td><td><span class="badge badge-get">GET</span></td><td>Dashboard admin: statistik total buku, anggota, peminjaman, terlambat</td></tr>
+            <tr><td><code>/buku</code></td><td><span class="badge badge-get">GET</span></td><td>Daftar semua buku</td></tr>
+            <tr><td><code>/buku</code></td><td><span class="badge badge-post">POST</span></td><td>Tambah buku baru</td></tr>
+            <tr><td><code>/buku/{id}</code></td><td><span class="badge badge-get">GET</span></td><td>Detail buku</td></tr>
+            <tr><td><code>/buku/{id}/edit</code></td><td><span class="badge badge-get">GET</span></td><td>Form edit buku</td></tr>
+            <tr><td><code>/buku/{id}</code></td><td><span class="badge badge-put">PUT</span></td><td>Update buku</td></tr>
+            <tr><td><code>/buku/{id}</code></td><td><span class="badge badge-delete">DEL</span></td><td>Hapus buku</td></tr>
+            <tr><td><code>/transaksi</code></td><td><span class="badge badge-get">GET</span></td><td>Daftar transaksi peminjaman</td></tr>
+            <tr><td><code>/transaksi/create</code></td><td><span class="badge badge-get">GET</span></td><td>Form tambah transaksi</td></tr>
+            <tr><td><code>/transaksi</code></td><td><span class="badge badge-post">POST</span></td><td>Simpan transaksi baru</td></tr>
+            <tr><td><code>/transaksi/{id}/edit</code></td><td><span class="badge badge-get">GET</span></td><td>Edit transaksi</td></tr>
+            <tr><td><code>/transaksi/{id}</code></td><td><span class="badge badge-put">PUT</span></td><td>Update transaksi</td></tr>
+            <tr><td><code>/transaksi/{id}</code></td><td><span class="badge badge-delete">DEL</span></td><td>Hapus transaksi</td></tr>
+            <tr><td><code>/transaksi/{id}/kembalikan</code></td><td><span class="badge badge-post">POST</span></td><td>Quick return (kembalikan buku)</td></tr>
+            <tr><td><code>/kelola-anggota</code></td><td><span class="badge badge-get">GET</span></td><td>Daftar anggota</td></tr>
+            <tr><td><code>/kelola-anggota/create</code></td><td><span class="badge badge-get">GET</span></td><td>Form tambah anggota</td></tr>
+            <tr><td><code>/kelola-anggota</code></td><td><span class="badge badge-post">POST</span></td><td>Simpan anggota baru</td></tr>
+            <tr><td><code>/kelola-anggota/{id}/edit</code></td><td><span class="badge badge-get">GET</span></td><td>Edit anggota</td></tr>
+            <tr><td><code>/kelola-anggota/{id}</code></td><td><span class="badge badge-put">PUT</span></td><td>Update anggota</td></tr>
+            <tr><td><code>/kelola-anggota/{id}</code></td><td><span class="badge badge-delete">DEL</span></td><td>Hapus anggota</td></tr>
+            <tr><td><code>/laporan</code></td><td><span class="badge badge-get">GET</span></td><td>Form filter laporan</td></tr>
+            <tr><td><code>/laporan/cetak</code></td><td><span class="badge badge-get">GET</span></td><td>Cetak laporan (printable)</td></tr>
+        </table>
+
+        <h3>Rute Anggota <span class="badge badge-anggota">ANGGOTA</span></h3>
+        <table>
+            <tr><th>URL</th><th>Method</th><th>Fungsi</th></tr>
+            <tr><td><code>/anggota/login</code></td><td><span class="badge badge-get">GET</span>/<span class="badge badge-post">POST</span></td><td>Form & proses login</td></tr>
+            <tr><td><code>/anggota/register</code></td><td><span class="badge badge-get">GET</span>/<span class="badge badge-post">POST</span></td><td>Form & proses registrasi</td></tr>
+            <tr><td><code>/anggota/dashboard</code></td><td><span class="badge badge-get">GET</span></td><td>Dashboard: jumlah buku dipinjam & dikembalikan</td></tr>
+            <tr><td><code>/anggota/katalog</code></td><td><span class="badge badge-get">GET</span></td><td>Katalog buku (dengan search)</td></tr>
+            <tr><td><code>/anggota/katalog/{buku}</code></td><td><span class="badge badge-get">GET</span></td><td>Detail buku + tombol pinjam</td></tr>
+            <tr><td><code>/anggota/pinjam/{buku_id}</code></td><td><span class="badge badge-post">POST</span></td><td>Pinjam buku</td></tr>
+            <tr><td><code>/anggota/riwayat</code></td><td><span class="badge badge-get">GET</span></td><td>Riwayat peminjaman</td></tr>
+            <tr><td><code>/anggota/kembalikan/{id}</code></td><td><span class="badge badge-post">POST</span></td><td>Kembalikan buku</td></tr>
+            <tr><td><code>/anggota/profile</code></td><td><span class="badge badge-get">GET</span>/<span class="badge badge-put">PUT</span></td><td>Lihat & update profil</td></tr>
+            <tr><td><code>/anggota/profile/password</code></td><td><span class="badge badge-put">PUT</span></td><td>Ganti password</td></tr>
+            <tr><td><code>/anggota/logout</code></td><td><span class="badge badge-post">POST</span></td><td>Logout</td></tr>
+        </table>
+
+        <hr>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">📖</span> 5. Penjelasan Detail Setiap Fitur</h2>
+
+        <!-- 5.1 -->
+        <h3>5.1 Manajemen Buku (Admin)</h3>
+        <p><strong>Controller:</strong> <code>BukuController.php</code> &nbsp;|&nbsp; <strong>Model:</strong> <code>Buku.php</code></p>
+
+        <h4>Alur Tambah Buku</h4>
+        <div class="flow-box">
+            <span class="flow-step">Admin isi form</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Validasi data</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Upload cover (opsional)</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Simpan ke DB</span>
+        </div>
+
+        <div class="card no-break">
+            <strong>Validasi yang dilakukan:</strong>
+            <ul>
+                <li>Judul, penulis, penerbit → <strong>wajib diisi</strong></li>
+                <li>Tahun → <strong>wajib, harus angka</strong></li>
+                <li>Stok → <strong>wajib, harus angka</strong></li>
+                <li>Deskripsi → opsional, maks 2000 karakter</li>
+                <li>Cover image → opsional, format jpeg/png/jpg/webp, maks 2MB</li>
+            </ul>
+        </div>
+
+        <h4>Alur Edit Buku</h4>
+        <ol>
+            <li>Admin buka halaman edit → form terisi data lama</li>
+            <li>Jika upload cover baru → cover lama dihapus dari storage, cover baru disimpan</li>
+            <li>Data di-update di database</li>
+        </ol>
+
+        <h4>Alur Hapus Buku</h4>
+        <ol>
+            <li>Cover image dihapus dari storage (jika ada)</li>
+            <li>Record dihapus dari tabel <code>bukus</code></li>
+        </ol>
+
+        <!-- 5.2 -->
+        <h3>5.2 Manajemen Transaksi / Peminjaman (Admin)</h3>
+        <p><strong>Controller:</strong> <code>TransaksiController.php</code> &nbsp;|&nbsp; <strong>Model:</strong> <code>Transaksi.php</code></p>
+
+        <h4>Alur Tambah Transaksi (Pinjam Buku via Admin)</h4>
+        <div class="flow-box">
+            <span class="flow-step">Pilih anggota</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Pilih buku</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Isi tanggal pinjam</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Validasi stok & duplikat</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Simpan + stok -1</span>
+        </div>
+
+        <div class="card card-red no-break">
+            <strong>Validasi Penting:</strong>
+            <ul>
+                <li>Jika <strong>stok buku = 0</strong> → error "Stok buku habis!"</li>
+                <li>Jika anggota <strong>sudah meminjam buku yang sama</strong> dan belum dikembalikan → error</li>
+            </ul>
+        </div>
+
+        <h4>Alur Kembalikan Buku (Quick Return)</h4>
+        <div class="flow-box">
+            <span class="flow-step">Admin klik "Kembalikan"</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Hitung denda otomatis</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Status → dikembalikan</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Stok buku +1</span>
+        </div>
+
+        <div class="card card-orange no-break">
+            <h4>💰 Sistem Denda (di <code>Transaksi.php → hitungDenda()</code>)</h4>
+            <ul>
+                <li>Batas pinjam: <strong>7 hari</strong></li>
+                <li>Jika lebih dari 7 hari: denda <strong>Rp1.000/hari</strong> keterlambatan</li>
+                <li>Rumus: <code>(jumlah_hari - 7) × Rp1.000</code></li>
+                <li>Contoh: pinjam 10 hari → (10 − 7) × 1.000 = <strong>Rp3.000</strong></li>
+            </ul>
+        </div>
+
+        <div class="card card-green no-break">
+            <h4>📦 Manajemen Stok Otomatis</h4>
+            <table>
+                <tr><th>Event</th><th>Efek pada Stok</th></tr>
+                <tr><td>Buku <strong>dipinjam</strong></td><td>Stok <strong>−1</strong></td></tr>
+                <tr><td>Buku <strong>dikembalikan</strong></td><td>Stok <strong>+1</strong></td></tr>
+                <tr><td>Transaksi <strong>dihapus</strong> (status masih dipinjam)</td><td>Stok <strong>+1</strong></td></tr>
+                <tr><td>Status diubah dari dikembalikan → dipinjam</td><td>Stok <strong>−1</strong> (cek stok dulu)</td></tr>
+            </table>
+        </div>
+
+        <!-- 5.3 -->
+        <h3>5.3 Manajemen Anggota (Admin)</h3>
+        <p><strong>Controller:</strong> <code>AnggotaController.php</code> &nbsp;|&nbsp; <strong>Model:</strong> <code>Anggota.php</code></p>
+
+        <div class="card no-break">
+            <strong>Fitur:</strong>
+            <ul>
+                <li><strong>Daftar Anggota:</strong> bisa search (nama, NIS, email) & filter by kelas</li>
+                <li><strong>Tambah Anggota:</strong> NIS, nama, kelas, email, password (NIS & email harus unik)</li>
+                <li><strong>Edit Anggota:</strong> password opsional (kosong = tidak berubah)</li>
+                <li><strong>Hapus Anggota:</strong> <span style="color: var(--accent-red); font-weight: 600;">TIDAK BISA dihapus</span> jika masih punya peminjaman aktif</li>
+            </ul>
+        </div>
+
+        <!-- 5.4 -->
+        <h3>5.4 Laporan (Admin)</h3>
+        <p><strong>Controller:</strong> <code>LaporanController.php</code></p>
+
+        <h4>Alur Cetak Laporan</h4>
+        <div class="flow-box">
+            <span class="flow-step">Admin isi filter (tanggal dari/sampai, status)</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Klik cetak</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Halaman printable tampil</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Ctrl+P → Print/Save as PDF</span>
+        </div>
+
+        <div class="card no-break">
+            <strong>Isi Laporan:</strong>
+            <ul>
+                <li>Daftar semua transaksi (sesuai filter)</li>
+                <li>Total denda keseluruhan</li>
+                <li>Total buku masih dipinjam</li>
+                <li>Total buku sudah dikembalikan</li>
+            </ul>
+            <p style="margin-top: 8px;"><strong>Catatan:</strong> Untuk buku yang masih dipinjam, denda dihitung secara dinamis (real-time). Untuk buku yang sudah dikembalikan, digunakan nilai denda yang tersimpan di database.</p>
+        </div>
+
+        <!-- 5.5 -->
+        <h3>5.5 Fitur Anggota (Siswa)</h3>
+        <p><strong>Controller:</strong> <code>AnggotaAuthController.php</code></p>
+
+        <h4>Dashboard Anggota</h4>
+        <p>Menampilkan: nama anggota, jumlah buku sedang dipinjam, jumlah buku dikembalikan.</p>
+
+        <h4>Katalog Buku</h4>
+        <ul>
+            <li>Menampilkan semua buku dari database</li>
+            <li>Bisa search berdasarkan judul, penulis, penerbit</li>
+            <li>Klik buku → halaman detail (judul, penulis, penerbit, tahun, stok, deskripsi, cover)</li>
+        </ul>
+
+        <h4>Alur Pinjam Buku (oleh Anggota)</h4>
+        <div class="flow-box">
+            <span class="flow-step">Klik "Pinjam" di detail buku</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Cek stok > 0?</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Cek sudah pinjam buku ini?</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Buat transaksi + stok −1</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">Redirect ke riwayat</span>
+        </div>
+
+        <h4>Riwayat Peminjaman</h4>
+        <ul>
+            <li>Menampilkan semua transaksi anggota yang sedang login</li>
+            <li>Bisa melihat status setiap peminjaman (dipinjam/dikembalikan)</li>
+            <li>Tombol <strong>"Kembalikan"</strong> untuk buku yang masih dipinjam</li>
+        </ul>
+
+        <h4>Profil</h4>
+        <ul>
+            <li>Update nama, kelas, email</li>
+            <li>Ganti password (harus masukkan password lama terlebih dahulu)</li>
+        </ul>
+
+        <hr>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">📂</span> 6. Struktur File Penting</h2>
+
+        <div class="file-tree">
+<span class="folder">perpus-ukk/</span>
+├── <span class="folder">app/</span>
+│   ├── <span class="folder">Models/</span>
+│   │   ├── <span class="file">User.php</span>          <span class="comment">← Model admin</span>
+│   │   ├── <span class="file">Anggota.php</span>       <span class="comment">← Model anggota (extends Authenticatable)</span>
+│   │   ├── <span class="file">Buku.php</span>          <span class="comment">← Model buku</span>
+│   │   └── <span class="file">Transaksi.php</span>     <span class="comment">← Model transaksi + hitung denda</span>
+│   └── <span class="folder">Http/Controllers/</span>
+│       ├── <span class="file">BukuController.php</span>        <span class="comment">← CRUD buku (admin)</span>
+│       ├── <span class="file">TransaksiController.php</span>   <span class="comment">← CRUD transaksi (admin)</span>
+│       ├── <span class="file">AnggotaController.php</span>     <span class="comment">← CRUD anggota (admin)</span>
+│       ├── <span class="file">AnggotaAuthController.php</span> <span class="comment">← Auth + fitur anggota</span>
+│       └── <span class="file">LaporanController.php</span>     <span class="comment">← Laporan & cetak</span>
+├── <span class="folder">config/</span>
+│   └── <span class="file">auth.php</span>              <span class="comment">← Konfigurasi 2 guard: web + anggota</span>
+├── <span class="folder">database/migrations/</span>      <span class="comment">← 12 file migrasi</span>
+├── <span class="folder">resources/views/</span>
+│   ├── <span class="folder">admin/</span>                <span class="comment">← Semua halaman admin</span>
+│   │   ├── <span class="file">buku.blade.php</span>        <span class="comment">(daftar + form tambah)</span>
+│   │   ├── <span class="folder">buku/</span>
+│   │   │   ├── <span class="file">edit.blade.php</span>    <span class="comment">(edit buku)</span>
+│   │   │   └── <span class="file">show.blade.php</span>    <span class="comment">(detail buku)</span>
+│   │   ├── <span class="folder">transaksi/</span>            <span class="comment">(index, create, edit)</span>
+│   │   ├── <span class="folder">anggota/</span>              <span class="comment">(index, create, edit)</span>
+│   │   └── <span class="folder">laporan/</span>              <span class="comment">(index, cetak)</span>
+│   ├── <span class="folder">anggota/</span>              <span class="comment">← Semua halaman anggota</span>
+│   │   ├── <span class="file">dashboard.blade.php</span>
+│   │   ├── <span class="file">katalog.blade.php</span>
+│   │   ├── <span class="file">detail-buku.blade.php</span>
+│   │   ├── <span class="file">riwayat.blade.php</span>
+│   │   ├── <span class="file">profile.blade.php</span>
+│   │   ├── <span class="file">login.blade.php</span>
+│   │   └── <span class="file">register.blade.php</span>
+│   ├── <span class="folder">layouts/</span>              <span class="comment">← Layout utama</span>
+│   │   ├── <span class="file">app.blade.php</span>         <span class="comment">(layout admin)</span>
+│   │   ├── <span class="file">navigation.blade.php</span>  <span class="comment">(navbar admin)</span>
+│   │   ├── <span class="file">theme.blade.php</span>       <span class="comment">(CSS dark/light mode)</span>
+│   │   └── <span class="file">theme-toggle.blade.php</span> <span class="comment">(tombol switch tema)</span>
+│   └── <span class="file">dashboard.blade.php</span>  <span class="comment">← Dashboard admin</span>
+└── <span class="folder">routes/</span>
+    └── <span class="file">web.php</span>               <span class="comment">← Semua definisi route</span>
+        </div>
+
+        <hr>
+
+        <!-- ============================================ -->
+        <h2><span class="section-icon">✨</span> 7. Fitur Tambahan</h2>
+        <table>
+            <tr><th>Fitur</th><th>Penjelasan</th></tr>
+            <tr><td><strong>Dark/Light Mode</strong></td><td>Menggunakan CSS variables di <code>theme.blade.php</code>, toggle via <code>theme-toggle.blade.php</code></td></tr>
+            <tr><td><strong>Cover Image Buku</strong></td><td>Upload gambar cover, disimpan di <code>storage/app/public/covers/</code></td></tr>
+            <tr><td><strong>Deskripsi Buku</strong></td><td>Sinopsis / deskripsi buku, maks 2000 karakter</td></tr>
+            <tr><td><strong>Sistem Denda</strong></td><td>Otomatis Rp1.000/hari setelah 7 hari peminjaman</td></tr>
+            <tr><td><strong>Manajemen Stok</strong></td><td>Stok otomatis berkurang saat dipinjam, bertambah saat dikembalikan</td></tr>
+            <tr><td><strong>Search & Filter</strong></td><td>Tersedia di halaman transaksi, anggota, dan katalog</td></tr>
+        </table>
+
+        <hr>
+        <p style="text-align: center; color: var(--text-secondary); font-size: 12px; margin-top: 20px;">
+            📚 Walkthrough Perpustakaan UKK — Dibuat secara otomatis &bull; Untuk menyimpan sebagai PDF: <strong>Ctrl+P → Save as PDF</strong>
+        </p>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-[#f8fafc] text-slate-900 antialiased;
+        background-image: 
+            radial-gradient(at 0% 0%, hsla(253,16%,100%,1) 0, transparent 50%), 
+            radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%), 
+            radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+        background-attachment: fixed;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-slate-300 rounded-full border-4 border-solid border-transparent bg-clip-padding;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-slate-400;
+    }
+}
+
+@layer components {
+    .glass {
+        @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+    }
+    
+    .glass-card {
+        @apply bg-white/80 backdrop-blur-sm border border-white/40 shadow-sm rounded-2xl transition-all duration-300 hover:shadow-md hover:bg-white/90;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center px-6 py-3 bg-slate-900 border border-transparent rounded-xl font-semibold text-sm text-white uppercase tracking-widest hover:bg-slate-800 focus:bg-slate-800 active:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition ease-in-out duration-150;
+    }
+}
