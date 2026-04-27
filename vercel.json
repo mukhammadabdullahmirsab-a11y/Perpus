@@ -1,16 +1,19 @@
 {
     "version": 2,
-    "nodeVersion": "20.x",
     "framework": null,
     "functions": {
         "api/*.php": {
-            "runtime": "vercel-php"
+            "runtime": "vercel-php@0.7.2"
         }
     },
     "routes": [
         {
             "src": "/(css|js|images|favicon.ico|robots.txt)(.*)",
             "dest": "/public/$1$2"
+        },
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
         },
         {
             "src": "/(.*)",
@@ -25,6 +28,7 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_STORE": "array",
         "SESSION_DRIVER": "cookie",
-        "LOG_CHANNEL": "stderr"
+        "LOG_CHANNEL": "stderr",
+        "APP_STORAGE": "/tmp"
     }
 }
